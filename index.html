@@ -5,55 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI + Intellectual Property</title>
 <link rel="icon" type="image/png" href="favicon.png">
-<meta name="description" content="Five reference guides for creatives navigating copyright, ownership, and legal liability in the age of generative AI. For informational and educational purposes only — not legal advice.">
+<meta name="description" content="Five reference guides for creatives navigating copyright, ownership, and legal liability in the age of generative AI.">
 <meta property="og:title" content="AI + Intellectual Property">
-<meta property="og:description" content="Reference Guides">
+<meta property="og:description" content="Five Reference Guides">
 <meta property="og:image" content="social-card.png">
 <meta property="og:type" content="website">
-
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="...">
-<meta name="twitter:description" content="...">
+<meta name="twitter:title" content="AI + Intellectual Property">
+<meta name="twitter:description" content="Five reference guides for creatives navigating copyright, ownership, and legal liability in the age of generative AI.">
 <meta name="twitter:image" content="social-card.png">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --ink: #1a1918;
-    --muted: #5f5e5a;
-    --faint: #888780;
-    --border: rgba(26,25,24,0.12);
-    --surface: #f5f3ee;
-    --card: #ffffff;
-    --red: #C94A2D;
-    --amber: #B5720A;
-    --teal: #0F6E56;
-    --purple: #534AB7;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --ink: #e8e6df;
-      --muted: #a8a69e;
-      --faint: #6e6d68;
-      --border: rgba(232,230,223,0.12);
-      --surface: #252420;
-      --card: #1c1b18;
-      --red: #e8705a;
-      --amber: #d4922a;
-      --teal: #2ab88e;
-      --purple: #8880d8;
-    }
+    --ink: #e8e6df;
+    --muted: #a8a69e;
+    --faint: #6e6d68;
+    --border: rgba(232,230,223,0.12);
+    --surface: #000000;
+    --card: #0f0f0e;
+    --red: #ffcc00;
+    --amber: #d4922a;
+    --teal: #ffcc00;
+    --purple: #8880d8;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
     font-family: 'DM Sans', system-ui, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     color: var(--ink);
     background: var(--surface);
     line-height: 1.6;
@@ -223,19 +206,11 @@
     margin-top: 2px;
   }
 
-  .b0 { background: #f1efe8; color: #5f5e5a; border: 0.5px solid #b4b2a9; }
-  .b1 { background: #faece7; color: #993c1d; border: 0.5px solid #f0997b; }
-  .b2 { background: #faeeda; color: #854f0b; border: 0.5px solid #fac775; }
-  .b3 { background: #e1f5ee; color: #0f6e56; border: 0.5px solid #5dcaa5; }
-  .b4 { background: #eeedfe; color: #534ab7; border: 0.5px solid #afa9ec; }
-
-  @media (prefers-color-scheme: dark) {
-    .b0 { background: #2c2c2a; color: #a8a69e; border-color: #444441; }
-    .b1 { background: #3a1e16; color: #e8705a; border-color: #6b3020; }
-    .b2 { background: #362212; color: #d4922a; border-color: #6b4518; }
-    .b3 { background: #0d2e24; color: #2ab88e; border-color: #155c44; }
-    .b4 { background: #1e1d40; color: #8880d8; border-color: #3d3898; }
-  }
+  .b0 { background: #2c2c2a; color: #a8a69e; border: 0.5px solid #444441; }
+  .b1 { background: #3a1e16; color: #e8705a; border: 0.5px solid #6b3020; }
+  .b2 { background: #362212; color: #d4922a; border: 0.5px solid #6b4518; }
+  .b3 { background: #0d2e24; color: #2ab88e; border: 0.5px solid #155c44; }
+  .b4 { background: #1e1d40; color: #8880d8; border: 0.5px solid #3d3898; }
 
   hr.div { border: none; border-top: 0.5px solid var(--border); margin: 1.5rem 0; }
 
@@ -280,19 +255,14 @@
 
   /* Alert */
   .alert {
-    border: 0.5px solid #f0997b;
-    background: #faece7;
+    border: 0.5px solid #6b3020;
+    background: #3a1e16;
     border-radius: 6px;
     padding: 11px 14px;
     margin-bottom: 1.25rem;
   }
 
-  @media (prefers-color-scheme: dark) {
-    .alert { background: #3a1e16; border-color: #6b3020; }
-    .alert p { color: #e8a090; }
-  }
-
-  .alert p { font-size: 12px; color: #993c1d; line-height: 1.7; }
+  .alert p { font-size: 12px; color: #e8a090; line-height: 1.7; }
   .alert p strong { font-weight: 500; }
 
   /* Flow grid */
@@ -334,17 +304,10 @@
     font-family: 'DM Mono', monospace;
   }
 
-  .fy { background: #eaf3de; color: #3b6d11; }
-  .fno { background: #fcebeb; color: #a32d2d; }
+  .fy { background: #172808; color: #8dc85a; }
+  .fno { background: #2d0f0f; color: #e87070; }
   .fa { background: var(--surface); color: var(--muted); }
-  .fw { background: #faeeda; color: #854f0b; }
-
-  @media (prefers-color-scheme: dark) {
-    .fy { background: #172808; color: #8dc85a; }
-    .fno { background: #2d0f0f; color: #e87070; }
-    .fa { background: var(--surface); color: var(--muted); }
-    .fw { background: #2d1a08; color: #d4922a; }
-  }
+  .fw { background: #2d1a08; color: #d4922a; }
 
   .rtag {
     display: inline-block;
@@ -356,15 +319,9 @@
     vertical-align: middle;
   }
 
-  .rh { background: #fcebeb; color: #a32d2d; }
-  .rm { background: #faeeda; color: #854f0b; }
-  .rl { background: #eaf3de; color: #3b6d11; }
-
-  @media (prefers-color-scheme: dark) {
-    .rh { background: #2d0f0f; color: #e87070; }
-    .rm { background: #2d1a08; color: #d4922a; }
-    .rl { background: #172808; color: #8dc85a; }
-  }
+  .rh { background: #2d0f0f; color: #e87070; }
+  .rm { background: #2d1a08; color: #d4922a; }
+  .rl { background: #172808; color: #8dc85a; }
 
   /* Two col */
   .two {
@@ -459,13 +416,8 @@
     font-size: 12px;
   }
 
-  .mc-warn { background: #faeeda !important; }
-  .mc-risk { background: #faece7 !important; }
-
-  @media (prefers-color-scheme: dark) {
-    .mc-warn { background: #2d1a08 !important; }
-    .mc-risk { background: #2d0f0f !important; }
-  }
+  .mc-warn { background: #2d1a08 !important; }
+  .mc-risk { background: #2d0f0f !important; }
 
   /* Checklist */
   .cl2 { list-style: none; padding: 0; margin-bottom: 1.25rem; }
@@ -511,15 +463,9 @@
     display: inline-block;
   }
 
-  .p1 { background: #fcebeb; color: #a32d2d; }
-  .p2 { background: #faeeda; color: #854f0b; }
-  .p3 { background: #eaf3de; color: #3b6d11; }
-
-  @media (prefers-color-scheme: dark) {
-    .p1 { background: #2d0f0f; color: #e87070; }
-    .p2 { background: #2d1a08; color: #d4922a; }
-    .p3 { background: #172808; color: #8dc85a; }
-  }
+  .p1 { background: #2d0f0f; color: #e87070; }
+  .p2 { background: #2d1a08; color: #d4922a; }
+  .p3 { background: #172808; color: #8dc85a; }
 
   /* Term rows */
   .rsec { margin-bottom: 1.5rem; }
@@ -1067,7 +1013,7 @@
   </section>
 
   <footer class="site-footer">
-    <span>Oolite Arts · Skills Program · April 2026</span>
+    <span>Updated: 2026-04-10</span>
     <span>Educational use only · Not legal advice</span>
   </footer>
 
