@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moderator Script — AI + IP Panel · Oolite Arts 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1918;
+    --muted: #5f5e5a;
+    --faint: #888780;
+    --border: rgba(26,25,24,0.12);
+    --surface: #f5f3ee;
+    --card: #ffffff;
+    --red: #C94A2D;
+    --amber: #B5720A;
+    --teal: #0F6E56;
+    --purple: #534AB7;
+    --blue: #185FA5;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e8e6df;
+      --muted: #a8a69e;
+      --faint: #6e6d68;
+      --border: rgba(232,230,223,0.12);
+      --surface: #252420;
+      --card: #1c1b18;
+    }
+  }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--surface);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+
+  /* Header */
+  .eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+  .site-title { font-family: 'DM Serif Display', Georgia, serif; font-size: clamp(22px, 4vw, 30px); font-weight: 400; line-height: 1.15; margin-bottom: 6px; }
+  .site-desc { font-size: 12px; color: var(--muted); line-height: 1.7; max-width: 520px; margin-bottom: 1.5rem; }
+
+  /* Timing bar */
+  .timing-bar {
+    display: flex;
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+
+  .tb-cell {
+    background: var(--card);
+    padding: 8px 10px;
+    flex: 1;
+    text-align: center;
+  }
+
+  .tb-label { font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin-bottom: 3px; }
+  .tb-time { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; color: var(--ink); }
+  .tb-desc { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+
+  @media (max-width: 540px) {
+    .timing-bar { flex-direction: column; }
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .section:last-of-type { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--faint);
+    min-width: 28px;
+    padding-top: 2px;
+  }
+
+  .section-meta { flex: 1; }
+
+  .section-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 3px;
+  }
+
+  .section-timing {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--faint);
+    letter-spacing: 0.06em;
+  }
+
+  .section-timing span {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 3px;
+    padding: 2px 6px;
+    margin-right: 6px;
+  }
+
+  /* Moderator says */
+  .mod-says {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .mod-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 6px;
+  }
+
+  .mod-text {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.75;
+    font-style: italic;
+  }
+
+  .mod-text em { font-style: normal; font-weight: 500; }
+
+  /* Note */
+  .note {
+    border-left: 2px solid var(--amber);
+    padding: 8px 12px;
+    margin-bottom: 12px;
+    background: #faeeda;
+    border-radius: 0 5px 5px 0;
+    font-size: 12px;
+    color: #6b4518;
+    line-height: 1.6;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .note { background: #2d1a08; color: #d4922a; border-color: #854f0b; }
+  }
+
+  .note strong { font-weight: 500; }
+
+  /* Question block */
+  .q-block {
+    margin-bottom: 1rem;
+  }
+
+  .q-target {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .q-somara { background: #e1f5ee; color: #0f6e56; border: 0.5px solid #5dcaa5; }
+  .q-andrej { background: #eeedfe; color: #534ab7; border: 0.5px solid #afa9ec; }
+  .q-both { background: #f1efe8; color: #5f5e5a; border: 0.5px solid #b4b2a9; }
+
+  @media (prefers-color-scheme: dark) {
+    .q-somara { background: #0d2e24; color: #2ab88e; border-color: #155c44; }
+    .q-andrej { background: #1e1d40; color: #8880d8; border-color: #3d3898; }
+    .q-both { background: #2c2c2a; color: #a8a69e; border-color: #444441; }
+  }
+
+  .q-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.55;
+    margin-bottom: 5px;
+  }
+
+  .q-purpose {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .q-followup {
+    margin-top: 8px;
+    padding-left: 14px;
+    border-left: 0.5px solid var(--border);
+  }
+
+  .q-followup-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 4px;
+  }
+
+  .q-followup li {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    padding: 2px 0 2px 12px;
+    position: relative;
+  }
+
+  .q-followup li::before {
+    content: '↳';
+    position: absolute;
+    left: 0;
+    color: var(--faint);
+    font-size: 11px;
+  }
+
+  /* Term block */
+  .term-block {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+
+  .term-word {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .term-you-say {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.65;
+    margin-bottom: 6px;
+  }
+
+  .term-ask {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.55;
+    border-top: 0.5px solid var(--border);
+    padding-top: 7px;
+    margin-top: 4px;
+  }
+
+  .term-target {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 1px 5px;
+    border-radius: 2px;
+    display: inline-block;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  /* Bio block */
+  .bio-block {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+
+  .bio-name {
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .bio-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 8px;
+  }
+
+  .bio-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* Divider */
+  .pivot-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 1.25rem 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  .pivot-note::before, .pivot-note::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media print {
+    .section { page-break-inside: avoid; }
+    body { background: white; color: black; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div style="margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--border);">
+    <div class="eyebrow">Moderator script · Private use only</div>
+    <h1 class="site-title">AI + Intellectual Property<br>Panel Moderator Guide</h1>
+    <p class="site-desc">Oolite Arts Skills Program · Tuesday, April 14, 2026 · 6–8 PM<br>Moderated by Dimitry Saïd Chamy · For moderator reference only — not for distribution.</p>
+  </div>
+
+  <!-- TIMING BAR -->
+  <div class="timing-bar">
+    <div class="tb-cell">
+      <div class="tb-label">Arrival / setup</div>
+      <div class="tb-time">6:00</div>
+      <div class="tb-desc">Networking begins</div>
+    </div>
+    <div class="tb-cell">
+      <div class="tb-label">Panel opens</div>
+      <div class="tb-time">6:20</div>
+      <div class="tb-desc">Framing + intros</div>
+    </div>
+    <div class="tb-cell">
+      <div class="tb-label">Terms round</div>
+      <div class="tb-time">6:30</div>
+      <div class="tb-desc">5 key terms</div>
+    </div>
+    <div class="tb-cell">
+      <div class="tb-label">Main questions</div>
+      <div class="tb-time">6:45</div>
+      <div class="tb-desc">4 subject areas</div>
+    </div>
+    <div class="tb-cell">
+      <div class="tb-label">Takeaways + Q&amp;A</div>
+      <div class="tb-time">7:35</div>
+      <div class="tb-desc">Closes ~7:55</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: FRAMING + INTROS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-meta">
+        <h2 class="section-title">Framing statement + speaker introductions</h2>
+        <div class="section-timing">
+          <span>6:20 PM</span>
+          <span>~10 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mod-says">
+      <div class="mod-label">Moderator says</div>
+      <div class="mod-text">
+        Good evening. Welcome to Skills — Oolite Arts' ongoing series on the practical realities of creative practice.<br><br>
+        Tonight, we're talking about intellectual property in the age of AI. And I want to start by being honest about something: <em>this is not a reassuring conversation.</em> The law is moving — but slowly. The technology is moving fast. And a lot of what you've been told about protecting your work is either incomplete, out of date, or doesn't account for the specific vulnerabilities that artists face right now.<br><br>
+        Four months ago, I moderated a version of this conversation at the Ratcliffe Art + Design Incubator at FIU with the same two attorneys. A lot has changed since then — and the most important thing that changed is that the Supreme Court <em>declined</em> to weigh in on AI and copyright. Which sounds like nothing happened. In fact, it's one of the most consequential non-decisions creatives need to understand.<br><br>
+        Before we get into that, let me introduce our two panelists — both of whom you may remember from February, and both of whom have agreed to help us navigate what is genuinely a chaotic legal landscape with honesty rather than false comfort.
+      </div>
+    </div>
+
+    <div class="pivot-note">Speaker introductions</div>
+
+    <div class="bio-block">
+      <div class="bio-name">Somara Jacques, Esq.</div>
+      <div class="bio-title">Founder, Latte Legal PLLC</div>
+      <div class="bio-text">
+        Somara Jacques is an attorney deeply passionate about the intersection of law and creativity. As founder of Latte Legal PLLC, she assists creative entrepreneurs in protecting and enhancing their businesses through intellectual property protection and registration, including copyrights and trademarks.<br><br>
+        With a background in intellectual property law and a keen understanding of the challenges facing artists, writers, musicians, and other creatives, Somara is committed to providing comprehensive legal guidance tailored to their unique needs. Her practice concentrates on copyright, trademark, business, and technology law — and also offers strategic counsel on licensing agreements, fair use, digital asset management, infringement disputes, contract drafting, and AI integration.<br><br>
+        Somara also fosters a supportive community through The Latte Lawyer Education and Information Platform — extending beyond traditional legal services with workshops, talks, and educational resources to empower creatives with the knowledge to protect their work in an ever-evolving digital landscape.
+      </div>
+    </div>
+
+    <div class="bio-block">
+      <div class="bio-name">Andrej Milic, Esq.</div>
+      <div class="bio-title">Director of Development, FIU College of Law</div>
+      <div class="bio-text">
+        Andrej Milic guides artists and creatives with the tools and knowledge to navigate the complex world of contracts — emphasizing the importance of understanding legalities involved in creative work, ensuring that individuals can safeguard their rights and interests proactively. He sheds light on common pitfalls creatives encounter, and strategies to mitigate potential risks.<br><br>
+        Born in Vienna, Austria, to Yugoslavian parents, Andrej is the Director of Development at FIU College of Law. He holds a Bachelor of Applied Science from Miami Dade College Honors College, a Master of Management with a specialization in Justice Administration from St. Thomas University, a Juris Doctor from the University of Florida, and an LL.M. in Intercultural Human Rights from St. Thomas University School of Law. He is a licensed Florida attorney, a participant in the Florida Bar Leadership Academy Class X, and teaches at numerous universities.
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Moderator note:</strong> After intros, pause briefly and move directly into the Benedict Cork story — no transition needed. The story is the transition.
+    </div>
+  </div>
+
+  <!-- SECTION 2: CORK STORY + FRAMING CASE -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-meta">
+        <h2 class="section-title">The opening scenario: Benedict Cork</h2>
+        <div class="section-timing">
+          <span>6:30 PM</span>
+          <span>~5 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mod-says">
+      <div class="mod-label">Moderator says</div>
+      <div class="mod-text">
+        I want to open with a story that Somara shared with me, because I think it captures everything we're going to talk about tonight more viscerally than any legal concept can.<br><br>
+        In late February, a British singer-songwriter named Benedict Cork posted a snippet of himself playing an unfinished song called "Something Kinda Strange" on TikTok. It got over 100,000 plays. A few days later, people started texting him to congratulate him on the release. Which was strange — because he hadn't finished the song. Eventually, someone sent him the track. It was on streaming platforms under someone else's name. The AI-completed version had a full second verse, a bridge, and lyrics that Cork — his words — <em>"begrudgingly wished he had written."</em><br><br>
+        He got the song removed after a few days. But here's what's important: he had almost no immediate legal recourse. The law wasn't fast enough. And Benedict Cork is one of the lucky ones — he found out. Most artists don't.<br><br>
+        I'm going to let that sit for a moment, and then I want to ask both of you: <em>what does a story like this tell us about where IP law actually is right now?</em>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-target q-both">Both panelists — open response</div>
+      <div class="q-text">When you hear the Benedict Cork story, what's the most important legal reality it reveals for independent artists?</div>
+      <div class="q-purpose">Opens the conversation viscerally, establishes the speed problem, invites both attorneys to set the tone. Let them react genuinely — don't rush.</div>
+      <div class="q-followup">
+        <div class="q-followup-label">If needed, follow up with</div>
+        <ul>
+          <li>Is this copyright infringement? Likeness theft? Identity fraud? Or something the law doesn't have a category for yet?</li>
+          <li>If you were Benedict Cork's attorney the day he found out, what's the first call you make?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: TERMS ROUND -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-meta">
+        <h2 class="section-title">Terms round: five concepts everyone needs</h2>
+        <div class="section-timing">
+          <span>6:37 PM</span>
+          <span>~12 min</span>
+          <span>~2 min per term</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mod-says">
+      <div class="mod-label">Moderator says</div>
+      <div class="mod-text">
+        Before we go further, I want to make sure everyone in the room is working from the same vocabulary. I'm going to give a plain-language definition of five terms — and I'm asking Somara and Andrej to correct me, argue with me, or tell me what I'm missing. These are starting points, not legal definitions. Ready?
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Format note:</strong> Read your definition, then point to one attorney for the correction/expansion. Keep each to about 90 seconds total. The goal is productive disagreement, not a lecture.
+    </div>
+
+    <div class="term-block">
+      <div class="term-word">01 · Denial of certiorari</div>
+      <div class="term-you-say">"You say:" On March 2nd, the Supreme Court declined to hear the Thaler case — the case asking whether an AI system could be a copyright author. A lot of headlines said 'Supreme Court rules AI can't hold copyright.' But that's not what happened. The Court didn't rule on anything. They just said 'not this case, not right now.' The lower court decision stands — but this is not settled law from the Supreme Court. Is that right?</div>
+      <div class="term-ask"><span class="term-target q-andrej">→ Andrej</span> What does denial of cert actually mean for how courts across the country treat this issue going forward?</div>
+    </div>
+
+    <div class="term-block">
+      <div class="term-word">02 · Human authorship requirement</div>
+      <div class="term-you-say">"You say:" US copyright law requires a human author. The Copyright Office confirmed this in 2025 — prompts alone are not sufficient to claim authorship. You have to show meaningful human creative contribution. The question nobody has answered yet is: how much is enough?</div>
+      <div class="term-ask"><span class="term-target q-somara">→ Somara</span> For an artist in this room tonight who uses AI tools in their work — what does "sufficient human contribution" actually look like in practice? Is there a rule of thumb?</div>
+    </div>
+
+    <div class="term-block">
+      <div class="term-word">03 · Fair use</div>
+      <div class="term-you-say">"You say:" Fair use is the legal doctrine that allows limited use of copyrighted work without permission. It's evaluated case by case on four factors. Courts are currently split on whether training AI on copyrighted works qualifies as fair use — some courts have said yes, it's transformative; others have said no. This is the most active legal battleground in AI and IP right now.</div>
+      <div class="term-ask"><span class="term-target q-both">→ Both</span> If I'm an artist and I find out my work was used to train an AI model — what's my actual legal position today?</div>
+    </div>
+
+    <div class="term-block">
+      <div class="term-word">04 · Epistemic capture</div>
+      <div class="term-you-say">"You say:" This one's mine — it's not a legal term yet. When I use an AI tool, I'm not just getting outputs. I'm submitting my creative decisions, my prompts, my iterations, my way of thinking about a problem. That thinking process may become training data for the platform. My methodology — not just my work — can be extracted, modeled, and redistributed. I'm calling this epistemic capture. Does the law have anything to say about it?</div>
+      <div class="term-ask"><span class="term-target q-somara">→ Somara</span> Is there any existing legal framework — trade secret, privacy law, anything — that gets close to protecting how someone thinks and works, not just what they produce?</div>
+    </div>
+
+    <div class="term-block">
+      <div class="term-word">05 · Right of publicity</div>
+      <div class="term-you-say">"You say:" The right of publicity is a state-level right — not federal — that protects your name, voice, and likeness from unauthorized commercial use. Florida has one. But it's not the same in every state, and the AI voice cloning situation that Benedict Cork experienced may or may not be covered depending on how the law is interpreted.</div>
+      <div class="term-ask"><span class="term-target q-andrej">→ Andrej</span> For Florida-based artists specifically — what does our state's right of publicity actually protect, and what does it miss?</div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: MAIN QUESTIONS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-meta">
+        <h2 class="section-title">Main conversation: four subject areas</h2>
+        <div class="section-timing">
+          <span>6:49 PM</span>
+          <span>~40 min</span>
+          <span>~10 min per area</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Moderator note:</strong> These four areas map to the four guides in the handout. You don't have to name them — just move through the terrain. Each area has a primary question and two follow-ups in case the conversation stalls. You won't need all of them.
+    </div>
+
+    <!-- Area A -->
+    <div class="pivot-note">Area A · The individual artist (6:49)</div>
+
+    <div class="q-block">
+      <div class="q-target q-somara">→ Somara</div>
+      <div class="q-text">An artist in this room tonight is building a practice — they're using Midjourney, or Suno, or ChatGPT in their workflow. They post work online. They have an audience. What are the two or three things they are most urgently getting wrong from a legal standpoint — things that are creating real vulnerability right now, today?</div>
+      <div class="q-purpose">Opens the practical register. Somara's practice is directly about this audience. Let her run.</div>
+      <div class="q-followup">
+        <div class="q-followup-label">Follow-up if needed</div>
+        <ul>
+          <li>Is copyright registration something every artist should be doing before they publish anything — even a sketch? What's the actual protection it provides?</li>
+          <li>What does a Terms of Service actually say about who owns what — and do artists read them?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-target q-andrej">→ Andrej</div>
+      <div class="q-text">The Benedict Cork story isn't really about copyright in the traditional sense. Someone took a partial performance, completed it with AI, and published it — faster than any legal process could respond. Is this a law problem, a platform problem, or both? And what should artists understand about the gap between what the law promises and what it can actually deliver at speed?</div>
+      <div class="q-purpose">Introduces the speed problem and forces an honest reckoning with legal limits.</div>
+    </div>
+
+    <!-- Area B -->
+    <div class="pivot-note">Area B · Freelancers, teams, and disclosure (7:00)</div>
+
+    <div class="q-block">
+      <div class="q-target q-andrej">→ Andrej</div>
+      <div class="q-text">Let's talk about the world most people in this room actually work in — freelance contracts, team projects, client work. If I'm a designer and I use AI in a deliverable I'm submitting to a client, what are my legal obligations around disclosure? And what happens if I don't disclose and the client later finds out?</div>
+      <div class="q-purpose">Andrej's contracts expertise is exactly right here. This is the most immediately actionable area for the audience.</div>
+      <div class="q-followup">
+        <div class="q-followup-label">Follow-up if needed</div>
+        <ul>
+          <li>What should a freelance contract say right now — in 2026 — about AI use that most contracts don't say yet?</li>
+          <li>If a client delivers a brief that says "no AI" — and a freelancer uses it anyway — is that breach of contract? What's the exposure?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-target q-somara">→ Somara</div>
+      <div class="q-text">There's a liability cascade I want to get your reaction to: if a freelancer uses AI without disclosing it, the client may receive work with no valid copyright — and may then distribute or sell that work believing they own it. Walk us through what that chain of liability actually looks like. Who gets hurt, and how?</div>
+      <div class="q-purpose">Makes the abstract liability concept concrete. Somara can walk through a real scenario.</div>
+    </div>
+
+    <!-- Area C -->
+    <div class="pivot-note">Area C · The bigger picture — what even large companies can't protect (7:10)</div>
+
+    <div class="q-block">
+      <div class="q-target q-both">→ Both</div>
+      <div class="q-text">I want to raise something that reframes the entire conversation. Recently, Anthropic — one of the largest AI companies in the world, the maker of Claude — had their code repository exposed. Before their legal team could execute copyright takedown notices, the code had been refactored in multiple languages and released for free online. A company with every legal resource available couldn't protect its core asset. If that's possible — if the speed of AI distribution outpaces the speed of legal protection even for a billion-dollar company — what is the realistic strategy for an individual artist or a small studio?</div>
+      <div class="q-purpose">This is the philosophical heart of the panel. The honest answer is that legal protection is increasingly insufficient — and the conversation needs to go there.</div>
+      <div class="q-followup">
+        <div class="q-followup-label">Follow-up if needed</div>
+        <ul>
+          <li>Is the answer to stop thinking about IP protection and start thinking about something else — relationship, context, irreducibility? Or is that surrendering too much?</li>
+          <li>Are there legal strategies — trade secrets, licensing, collective action — that actually do work at the speed that AI operates?</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Area D -->
+    <div class="pivot-note">Area D · Institutions, education, and preparing the next generation (7:22)</div>
+
+    <div class="q-block">
+      <div class="q-target q-andrej">→ Andrej</div>
+      <div class="q-text">You teach law and you work within a university. What should creative programs — art schools, design programs, incubators like RADI — be teaching students about IP and AI right now that most of them aren't? Not the plagiarism conversation. The deeper one. What does a graduating creative in 2026 need to understand to protect themselves in the world they're entering?</div>
+      <div class="q-purpose">Andrej's institutional role makes him the right voice here. Also directly relevant to Oolite's educational mission.</div>
+      <div class="q-followup">
+        <div class="q-followup-label">Follow-up if needed</div>
+        <ul>
+          <li>Most university IP policies predate generative AI. Who owns AI-assisted student work when institutional resources are used? Is this being addressed?</li>
+          <li>What's the one piece of legal literacy every creative should have before they take their first client?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-target q-somara">→ Somara</div>
+      <div class="q-text">You built the Latte Lawyer platform specifically to democratize legal education for creatives. Given everything we've talked about tonight — the Benedict Cork scenario, the speed problem, the epistemic capture question — what does that education look like now, in 2026, versus when you started? What has changed most urgently about what creatives need to know?</div>
+      <div class="q-purpose">Gives Somara a chance to speak from her actual mission. Personal, forward-looking, and connects to the audience's ongoing need beyond tonight.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: TAKEAWAYS + Q&A -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-meta">
+        <h2 class="section-title">Takeaways + audience Q&amp;A</h2>
+        <div class="section-timing">
+          <span>7:35 PM</span>
+          <span>~20 min</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mod-says">
+      <div class="mod-label">Moderator says — closing the main conversation</div>
+      <div class="mod-text">
+        Before we open to the room, I want to give each of you a moment for a concrete takeaway. Not a legal disclaimer — a real thing. If someone leaves tonight and does one thing differently because of this conversation, what should it be? Somara, let's start with you. Then Andrej.
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Format note:</strong> Each panelist gets 60–90 seconds. Keep it tight. Then open to audience questions. Budget about 15 minutes for Q&A — take 3–4 questions maximum, don't try to get everyone. Close at 7:55 sharp.
+    </div>
+
+    <div class="q-block" style="margin-top: 1rem;">
+      <div class="q-target q-both">→ Both panelists in sequence</div>
+      <div class="q-text">One concrete thing. Something an artist can do this week — not eventually, not when they have a lawyer, not when the law catches up. This week.</div>
+      <div class="q-purpose">Forces specificity. The best panels end on something actionable. Resist the urge to let this become a summary speech.</div>
+    </div>
+
+    <div class="pivot-note">Audience Q&A — 7:40–7:55</div>
+
+    <div class="mod-says">
+      <div class="mod-label">Moderator says — opening Q&A</div>
+      <div class="mod-text">
+        We have about fifteen minutes for questions. A reminder that what Somara and Andrej share tonight is for informational and educational purposes — it's not legal advice and it doesn't create an attorney-client relationship. With that said — questions?
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>If Q&A stalls, use these prompts:</strong> "Someone in this room is using AI in their work right now and hasn't told anyone — what question should they be asking tonight?" / "What's the question you get asked most often that this audience should hear the answer to?"
+    </div>
+
+    <div class="pivot-note">Close — 7:55</div>
+
+    <div class="mod-says">
+      <div class="mod-label">Moderator says — closing</div>
+      <div class="mod-text">
+        I want to close by doing something a little self-referential. These handouts you received tonight — the five guides on AI and IP — I built them with the help of an AI tool. I made every curatorial and editorial decision. I wrote the framing. I chose what matters for this audience. But the research, the synthesis, the formatting — that was collaborative with a machine.<br><br>
+        I'm telling you that because transparency is one of the things we've been talking about all night. And because the guides themselves are a demonstration of the exact question at the center of this conversation: how much human contribution is enough? I think I know my answer. I'd love to hear yours.<br><br>
+        Thank you to Somara Jacques and Andrej Milic for being here — and for being honest with us. The guides are yours to keep. The handout link is <em>2urn.github.io/ipai</em> — accessible to anyone, no account required. Please follow Somara and Andrej, support their work, and if you need an attorney — call them.
+      </div>
+    </div>
+  </div>
+
+  <!-- EMERGENCY PIVOTS -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div class="section-meta">
+        <h2 class="section-title">Emergency pivots + contingency questions</h2>
+        <div class="section-timing"><span>Reference only</span></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>If conversation stalls or goes off-track:</strong> Use these to redirect or restart.
+    </div>
+
+    <div class="q-block">
+      <div class="q-target q-both">Reset question</div>
+      <div class="q-text">Let me bring this back to someone in this room. If you're a visual artist who has never used AI — does anything we've talked about tonight affect you? Or are you safe?</div>
+      <div class="q-purpose">Grounds an abstract conversation back in the room. Almost always provokes a strong answer.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-target q-both">Tension question</div>
+      <div class="q-text">I want to put a tension on the table. Some people argue that AI is democratizing creative tools — giving access to people who couldn't afford them before. Others say it's industrializing theft. Are both things true? And does the law help us hold that contradiction or does it have to pick a side?</div>
+      <div class="q-purpose">Injects productive disagreement if the conversation is too aligned.</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-target q-somara">Somara — personal question</div>
+      <div class="q-text">You work with creative entrepreneurs every day. In the last six months — since AI started moving this fast — has the nature of what they're coming to you with changed? What are you seeing on the ground?</div>
+    </div>
+
+    <div class="q-block">
+      <div class="q-target q-andrej">Andrej — personal question</div>
+      <div class="q-text">You teach law students and you work within an institution. When you're in the classroom talking about AI and IP, what's the question your students ask that you find hardest to answer honestly?</div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <span>Moderator script · Not for distribution</span>
+    <span>Dimitry Saïd Chamy · Oolite Arts · April 15, 2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
