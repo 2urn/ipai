@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI + Intellectual Property — Oolite Arts Skills Program 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1918;
+    --muted: #5f5e5a;
+    --faint: #888780;
+    --border: rgba(26,25,24,0.12);
+    --surface: #f5f3ee;
+    --card: #ffffff;
+    --red: #C94A2D;
+    --amber: #B5720A;
+    --teal: #0F6E56;
+    --purple: #534AB7;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #e8e6df;
+      --muted: #a8a69e;
+      --faint: #6e6d68;
+      --border: rgba(232,230,223,0.12);
+      --surface: #252420;
+      --card: #1c1b18;
+      --red: #e8705a;
+      --amber: #d4922a;
+      --teal: #2ab88e;
+      --purple: #8880d8;
+    }
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--surface);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 5rem;
+  }
+
+  /* Header */
+  .site-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 8px;
+  }
+
+  .site-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(26px, 5vw, 36px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .site-desc {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 500px;
+    line-height: 1.7;
+  }
+
+  .panelists {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 1.25rem;
+  }
+
+  @media (max-width: 500px) {
+    .panelists { grid-template-columns: 1fr; }
+  }
+
+  .panelist-card {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 14px;
+  }
+
+  .panelist-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 3px;
+  }
+
+  .panelist-name {
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .panelist-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* Nav */
+  .guide-nav {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .guide-nav button {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 5px 11px;
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    background: var(--card);
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .guide-nav button:hover {
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .guide-nav button.active {
+    background: var(--ink);
+    color: var(--card);
+    border-color: var(--ink);
+  }
+
+  /* Guides */
+  .guide { display: none; }
+  .guide.visible { display: block; }
+
+  .guide-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .guide-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 4px;
+  }
+
+  .guide-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+
+  .guide-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 5px;
+    max-width: 420px;
+    line-height: 1.65;
+  }
+
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .b0 { background: #f1efe8; color: #5f5e5a; border: 0.5px solid #b4b2a9; }
+  .b1 { background: #faece7; color: #993c1d; border: 0.5px solid #f0997b; }
+  .b2 { background: #faeeda; color: #854f0b; border: 0.5px solid #fac775; }
+  .b3 { background: #e1f5ee; color: #0f6e56; border: 0.5px solid #5dcaa5; }
+  .b4 { background: #eeedfe; color: #534ab7; border: 0.5px solid #afa9ec; }
+
+  @media (prefers-color-scheme: dark) {
+    .b0 { background: #2c2c2a; color: #a8a69e; border-color: #444441; }
+    .b1 { background: #3a1e16; color: #e8705a; border-color: #6b3020; }
+    .b2 { background: #362212; color: #d4922a; border-color: #6b4518; }
+    .b3 { background: #0d2e24; color: #2ab88e; border-color: #155c44; }
+    .b4 { background: #1e1d40; color: #8880d8; border-color: #3d3898; }
+  }
+
+  hr.div { border: none; border-top: 0.5px solid var(--border); margin: 1.5rem 0; }
+
+  /* Section label */
+  .slabel {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* Case box */
+  .case-box {
+    border-left: 2px solid var(--red);
+    padding: 11px 14px;
+    margin-bottom: 1.25rem;
+    background: var(--card);
+    border-radius: 0 6px 6px 0;
+  }
+
+  .case-box .cl {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--red);
+    margin-bottom: 5px;
+  }
+
+  .case-box p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .case-box p em { font-style: italic; color: var(--ink); }
+
+  /* Alert */
+  .alert {
+    border: 0.5px solid #f0997b;
+    background: #faece7;
+    border-radius: 6px;
+    padding: 11px 14px;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .alert { background: #3a1e16; border-color: #6b3020; }
+    .alert p { color: #e8a090; }
+  }
+
+  .alert p { font-size: 12px; color: #993c1d; line-height: 1.7; }
+  .alert p strong { font-weight: 500; }
+
+  /* Flow grid */
+  .flow-grid {
+    display: grid;
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .flow-row {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    background: var(--card);
+  }
+
+  .fn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--faint);
+    padding: 13px 0 0 8px;
+  }
+
+  .fc { padding: 10px 14px; border-left: 0.5px solid var(--border); }
+
+  .fq { font-weight: 500; font-size: 13px; margin-bottom: 5px; color: var(--ink); }
+
+  .tag {
+    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    margin: 2px 4px 2px 0;
+    padding: 2px 7px;
+    border-radius: 3px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .fy { background: #eaf3de; color: #3b6d11; }
+  .fno { background: #fcebeb; color: #a32d2d; }
+  .fa { background: var(--surface); color: var(--muted); }
+  .fw { background: #faeeda; color: #854f0b; }
+
+  @media (prefers-color-scheme: dark) {
+    .fy { background: #172808; color: #8dc85a; }
+    .fno { background: #2d0f0f; color: #e87070; }
+    .fa { background: var(--surface); color: var(--muted); }
+    .fw { background: #2d1a08; color: #d4922a; }
+  }
+
+  .rtag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+
+  .rh { background: #fcebeb; color: #a32d2d; }
+  .rm { background: #faeeda; color: #854f0b; }
+  .rl { background: #eaf3de; color: #3b6d11; }
+
+  @media (prefers-color-scheme: dark) {
+    .rh { background: #2d0f0f; color: #e87070; }
+    .rm { background: #2d1a08; color: #d4922a; }
+    .rl { background: #172808; color: #8dc85a; }
+  }
+
+  /* Two col */
+  .two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 520px) {
+    .two { grid-template-columns: 1fr; }
+  }
+
+  /* Info card */
+  .ic {
+    background: var(--card);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .iclabel {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 7px;
+  }
+
+  .ic ul { list-style: none; padding: 0; }
+
+  .ic li {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 3px 0 3px 14px;
+    position: relative;
+    line-height: 1.55;
+  }
+
+  .ic li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--faint);
+    font-size: 10px;
+    top: 5px;
+  }
+
+  /* Matrix grid */
+  .mgrid {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 560px) {
+    .mgrid { grid-template-columns: 1fr; }
+    .mgrid .mh:not(:first-child) { display: none; }
+  }
+
+  .mh {
+    background: var(--surface);
+    padding: 8px 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  .mc {
+    background: var(--card);
+    padding: 10px 12px;
+    color: var(--muted);
+    line-height: 1.55;
+    font-size: 12px;
+  }
+
+  .mc strong {
+    display: block;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3px;
+    font-size: 12px;
+  }
+
+  .mc-warn { background: #faeeda !important; }
+  .mc-risk { background: #faece7 !important; }
+
+  @media (prefers-color-scheme: dark) {
+    .mc-warn { background: #2d1a08 !important; }
+    .mc-risk { background: #2d0f0f !important; }
+  }
+
+  /* Checklist */
+  .cl2 { list-style: none; padding: 0; margin-bottom: 1.25rem; }
+
+  .cl2 li {
+    display: flex;
+    gap: 9px;
+    align-items: flex-start;
+    padding: 7px 0;
+    border-bottom: 0.5px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .cl2 li:last-child { border-bottom: none; }
+
+  .cb {
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    border: 0.5px solid var(--border);
+    border-radius: 3px;
+    margin-top: 2px;
+    background: var(--card);
+  }
+
+  .ctext strong {
+    font-weight: 500;
+    color: var(--ink);
+    display: block;
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+
+  .pri {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+    vertical-align: middle;
+    display: inline-block;
+  }
+
+  .p1 { background: #fcebeb; color: #a32d2d; }
+  .p2 { background: #faeeda; color: #854f0b; }
+  .p3 { background: #eaf3de; color: #3b6d11; }
+
+  @media (prefers-color-scheme: dark) {
+    .p1 { background: #2d0f0f; color: #e87070; }
+    .p2 { background: #2d1a08; color: #d4922a; }
+    .p3 { background: #172808; color: #8dc85a; }
+  }
+
+  /* Term rows */
+  .rsec { margin-bottom: 1.5rem; }
+
+  .rlabel {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 8px;
+    padding-bottom: 5px;
+    border-bottom: 0.5px solid var(--border);
+    display: block;
+  }
+
+  .trow {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  @media (max-width: 480px) {
+    .trow { grid-template-columns: 1fr; }
+    .tname { border-right: none; border-bottom: 0.5px solid var(--border); padding-bottom: 4px; }
+    .tdef { padding-left: 0; padding-top: 4px; }
+  }
+
+  .trow:last-child { border-bottom: none; }
+
+  .tname {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink);
+    padding: 9px 12px 9px 0;
+    border-right: 0.5px solid var(--border);
+  }
+
+  .tdef {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 9px 0 9px 12px;
+    line-height: 1.6;
+  }
+
+  /* Ref links */
+  .rlinks { font-size: 12px; color: var(--muted); line-height: 1.9; }
+  .rlinks div { padding: 1px 0; }
+  .rlinks a { color: var(--teal); text-decoration: none; }
+  .rlinks a:hover { text-decoration: underline; }
+
+  /* Spectrum */
+  .spectrum {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0.75rem 0 1.5rem;
+  }
+
+  @media (max-width: 500px) {
+    .spectrum { grid-template-columns: 1fr 1fr; }
+  }
+
+  .sp-cell {
+    background: var(--card);
+    padding: 10px 9px;
+    text-align: center;
+  }
+
+  .sp-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .sp-sub { font-size: 11px; color: var(--muted); line-height: 1.45; }
+  .sp-1 .sp-label { color: #3b6d11; }
+  .sp-2 .sp-label { color: #0f6e56; }
+  .sp-3 .sp-label { color: #854f0b; }
+  .sp-4 .sp-label { color: #993c1d; }
+  .sp-5 .sp-label { color: #a32d2d; }
+
+  /* Glossary terms */
+  .gterm {
+    border-bottom: 0.5px solid var(--border);
+    padding: 13px 0;
+  }
+  .gterm:last-of-type { border-bottom: none; }
+
+  .gterm-word {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+
+  .gterm-def {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 580px;
+  }
+
+  .gterm-eg {
+    font-size: 11px;
+    color: var(--faint);
+    margin-top: 5px;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  /* Footnote */
+  .footnote {
+    font-size: 11px;
+    color: var(--faint);
+    line-height: 1.7;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 0.5px solid var(--border);
+  }
+
+  .footnote strong { font-weight: 500; color: var(--muted); }
+
+  /* Footer */
+  .site-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Print styles */
+  @media print {
+    .guide-nav { display: none; }
+    .guide { display: block !important; page-break-after: always; }
+    body { background: white; color: black; }
+    .site-footer { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="site-header">
+    <div class="eyebrow">Oolite Arts · Skills Program · April 15, 2026</div>
+    <h1 class="site-title">AI + Intellectual Property</h1>
+    <p class="site-desc">Five reference guides for creatives navigating copyright, ownership, and legal liability in the age of generative AI. For informational and educational purposes only — not legal advice.</p>
+    <div class="panelists">
+      <div class="panelist-card">
+        <div class="panelist-role">Panelist</div>
+        <div class="panelist-name">Somara Jacques, Esq.</div>
+        <div class="panelist-desc">Founder, Latte Legal PLLC. Copyright, trademark, entertainment law, and AI integration for creative entrepreneurs.</div>
+      </div>
+      <div class="panelist-card">
+        <div class="panelist-role">Panelist</div>
+        <div class="panelist-name">Andrej Milic, Esq.</div>
+        <div class="panelist-desc">Director of Development, FIU College of Law. Contracts, LL.M. in Intercultural Human Rights. Educator and practicing attorney.</div>
+      </div>
+    </div>
+  </header>
+
+  <nav class="guide-nav" aria-label="Guide navigation">
+    <button class="active" onclick="show(0)" aria-pressed="true">00 · Glossary</button>
+    <button onclick="show(1)">01 · Individual</button>
+    <button onclick="show(2)">02 · Freelance</button>
+    <button onclick="show(3)">03 · Client work</button>
+    <button onclick="show(4)">04 · Institutional</button>
+  </nav>
+
+  <!-- GUIDE 00: GLOSSARY -->
+  <section class="guide visible" id="g0" aria-label="Guide 0: Glossary">
+
+    <div class="guide-header">
+      <div>
+        <div class="guide-label">Guide 00 · Panel terms</div>
+        <h2 class="guide-title">Before we begin</h2>
+        <p class="guide-sub">Key terms for tonight's conversation. Starting points, not legal definitions — our attorneys will sharpen, qualify, and argue with all of them.</p>
+      </div>
+      <span class="badge b0">Glossary</span>
+    </div>
+
+    <span class="slabel">The spectrum of protection</span>
+    <div class="spectrum">
+      <div class="sp-cell sp-1"><div class="sp-label">Protected</div><div class="sp-sub">Fixed, original expression with human authorship</div></div>
+      <div class="sp-cell sp-2"><div class="sp-label">Partial</div><div class="sp-sub">Human + AI collaboration, documented contributions</div></div>
+      <div class="sp-cell sp-3"><div class="sp-label">Contested</div><div class="sp-sub">AI-assisted work — courts still deciding "how much"</div></div>
+      <div class="sp-cell sp-4"><div class="sp-label">Unprotected</div><div class="sp-sub">Purely AI-generated output, style, process, methodology</div></div>
+      <div class="sp-cell sp-5"><div class="sp-label">No recourse</div><div class="sp-sub">Work spread faster than law can move</div></div>
+    </div>
+
+    <div class="gterm">
+      <div class="gterm-word">Copyright</div>
+      <div class="gterm-def">The automatic legal protection for original creative works fixed in a tangible form — text, images, music, code. In the US, it exists the moment you create something with sufficient human creativity. Registration with the Copyright Office ($65) is not required to own copyright, but is essential for enforcement and damages.</div>
+      <div class="gterm-eg">What it doesn't cover: style, ideas, facts, processes, or works created purely by AI.</div>
+    </div>
+
+    <div class="gterm">
+      <div class="gterm-word">Human authorship requirement</div>
+      <div class="gterm-def">The principle, now firmly settled in US law, that copyright requires a human creator. <em>Thaler v. Perlmutter</em>: SCOTUS declined to hear the appeal on March 2, 2026, leaving intact the DC Circuit's ruling that AI alone cannot be a copyright author. The key open question: how much human involvement is "enough"?</div>
+      <div class="gterm-eg">Denial of cert ≠ a new Supreme Court ruling. It means the lower court decision stands, but SCOTUS has not itself ruled — and could revisit in a future case.</div>
+    </div>
+
+    <div class="gterm">
+      <div class="gterm-word">Denial of certiorari</div>
+      <div class="gterm-def">The Supreme Court's refusal to hear a case. It does NOT mean SCOTUS agrees with the lower court — only that they declined to review it this time. The lower court ruling becomes final for that case, but is not binding national Supreme Court precedent. SCOTUS can still take up the same issue in a future case.</div>
+      <div class="gterm-eg">Think of it as: the Court said "not this case, not right now" — not "this is settled forever."</div>
+    </div>
+
+    <div class="gterm">
+      <div class="gterm-word">Fair use</div>
+      <div class="gterm-def">A legal doctrine allowing limited use of copyrighted material without permission, evaluated case-by-case on four factors: purpose and character of the use, nature of the original work, amount used, and effect on the market for the original. Courts are currently split on whether training AI on copyrighted works qualifies as fair use. Not settled law.</div>
+      <div class="gterm-eg">The Copyright Office's Part 3 report (May 2025): "Some uses will qualify as fair use, and some will not." No bright line yet.</div>
+    </div>
+
+    <div class="gterm">
+      <div class="gterm-word">Right of publicity</div>
+      <div class="gterm-def">Your legal right to control commercial use of your name, voice, image, and likeness. A state-level right in the US — not federal copyright. Florida has one (Fla. Stat. § 540.08). Increasingly relevant as AI voice and likeness cloning becomes trivial and cheap.</div>
+      <div class="gterm-eg">Benedict Cork (Feb 2026): a snippet posted online was run through an AI generator; a completed song appeared on streaming platforms under a different name within days. Cork got it removed — eventually.</div>
+    </div>
+
+    <div class="gterm">
+      <div class="gterm-word">Epistemic capture</div>
+      <div class="gterm-def">Not yet a legal category — a framework for understanding what AI tools extract beyond your outputs. When you use an AI platform, your prompts, iterations, decisions, and creative patterns may become training data. Your <em>way of thinking</em> — not just what you make — can be absorbed, modeled, and redistributed without your consent or compensation.</div>
+      <div class="gterm-eg">The question isn't just "can someone copy my art?" It's "can someone copy me?"</div>
+    </div>
+
+    <div class="gterm">
+      <div class="gterm-word">Training data</div>
+      <div class="gterm-def">The body of existing content used to teach an AI model. Your published work, prompts submitted to AI tools, and interaction patterns may all become training data depending on a platform's terms of service. Whether using copyrighted works as training data constitutes infringement is still being litigated in dozens of active cases.</div>
+    </div>
+
+    <div class="gterm">
+      <div class="gterm-word">Terms of service (ToS)</div>
+      <div class="gterm-def">The contract you accept when using any AI tool. Most ToS grant the platform broad rights to use your inputs for training. Many default to inclusion — opt-outs exist but must be actively sought. Reading ToS is now a professional skill for creatives, not a technicality.</div>
+      <div class="gterm-eg">Adobe, some Midjourney tiers, and enterprise deployments offer training opt-outs. Free tiers typically do not.</div>
+    </div>
+
+    <div class="gterm">
+      <div class="gterm-word">AI music slop / streaming fraud</div>
+      <div class="gterm-def">The industrialized generation and upload of AI music to streaming platforms, either to generate fraudulent royalties or to impersonate artists. Deezer: 50,000 AI-generated tracks uploaded daily = 34% of all new music. A North Carolina man pled guilty in March 2026 to an $8M scheme using AI songs streamed by bots. Independent artists are the primary targets.</div>
+    </div>
+
+    <div class="gterm">
+      <div class="gterm-word">DMCA takedown</div>
+      <div class="gterm-def">A legal notice under the Digital Millennium Copyright Act requiring a platform to remove allegedly infringing content. Fast in theory; slow in practice when AI-generated content spreads faster than notices can land, or when content is transformed and redistributed before takedown occurs.</div>
+      <div class="gterm-eg">The Anthropic scenario: even a company with legal teams could not contain a leaked code repository before it was refactored in multiple languages and freely redistributed online.</div>
+    </div>
+
+    <div class="footnote">
+      <strong>For educational purposes only.</strong> This guide does not constitute legal advice and does not create an attorney-client relationship. Prepared by Dimitry Saïd Chamy, Co-Founding Faculty, Ratcliffe Art + Design Incubator at FIU · Oolite Arts Skills Program · April 2026.
+    </div>
+  </section>
+
+  <!-- GUIDE 01: INDIVIDUAL -->
+  <section class="guide" id="g1" aria-label="Guide 1: Individual Creator">
+
+    <div class="guide-header">
+      <div>
+        <div class="guide-label">Guide 01</div>
+        <h2 class="guide-title">The individual creator</h2>
+        <p class="guide-sub">Decision framework for solo artists and creative practitioners using AI tools in their own practice.</p>
+      </div>
+      <span class="badge b1">Solo practice</span>
+    </div>
+
+    <div class="case-box">
+      <div class="cl">Case study: Benedict Cork, February 2026</div>
+      <p>British singer-songwriter Benedict Cork posted a snippet of his unfinished song "Something Kinda Strange" on TikTok. It received 100,000+ plays. Days later, strangers were texting to congratulate him on the release — which was odd, because he hadn't finished it. Someone had taken his snippet, run it through an AI music generator, added a full second verse and bridge, and published it on streaming platforms under a different name. Cork got it removed after a few days. But the song had already been heard, streamed, and attributed to a stranger. He had almost no immediate legal recourse. <em>"The fact that it's coming up with these things now, when we're only a few years into the AI revolution — what's it gonna be like in 10 years time?"</em></p>
+    </div>
+
+    <span class="slabel">The scale of the problem (2026)</span>
+    <div class="two">
+      <div class="ic">
+        <div class="iclabel">Streaming fraud</div>
+        <ul>
+          <li>50,000 AI tracks uploaded to Deezer daily — 34% of all new music</li>
+          <li>Sony requested removal of 135,000+ AI impersonation songs in March alone</li>
+          <li>NC man pled guilty: $8M from AI songs streamed by bots</li>
+          <li>Independent artists are primary targets — enough audience, not enough protection</li>
+        </ul>
+      </div>
+      <div class="ic">
+        <div class="iclabel">Who gets targeted</div>
+        <ul>
+          <li>Low/mid-level artists with devoted followings</li>
+          <li>Dormant artists whose return would spark interest</li>
+          <li>Deceased artists: SOPHIE, Uncle Tupelo</li>
+          <li>Anyone going viral — speed is the weapon</li>
+          <li>"Enough listeners, not enough profile to be protected"</li>
+        </ul>
+      </div>
+    </div>
+
+    <span class="slabel">Decision flow: using AI tools in your practice</span>
+    <div class="flow-grid">
+      <div class="flow-row"><div class="fn">1</div><div class="fc"><div class="fq">Are you using an AI tool that ingests your prompts, uploads, or style data?</div><span class="tag fy">YES → continue</span><span class="tag fno">NO → standard copyright applies</span></div></div>
+      <div class="flow-row"><div class="fn">2</div><div class="fc"><div class="fq">Have you read the tool's Terms of Service regarding training data use?</div><span class="tag fy">YES → note what you consented to</span><span class="tag fno">NO → assume your inputs may train the model <span class="rtag rh">risk</span></span></div></div>
+      <div class="flow-row"><div class="fn">3</div><div class="fc"><div class="fq">Is your creative process — prompts, iterations, decisions — being recorded by the platform?</div><span class="tag fa">Your methodology may be training data. This is your epistemic exposure.</span></div></div>
+      <div class="flow-row"><div class="fn">4</div><div class="fc"><div class="fq">Does the AI output contain significant human creative contribution?</div><span class="tag fy">YES → you may claim copyright on your contributions</span><span class="tag fno">NO → output likely unprotectable under Thaler (2026)</span></div></div>
+      <div class="flow-row"><div class="fn">5</div><div class="fc"><div class="fq">Are you documenting your creative decisions and human input at each stage?</div><span class="tag fy">YES → strong copyright position</span><span class="tag fno">NO → register your work and start documenting now <span class="rtag rm">action</span></span></div></div>
+      <div class="flow-row"><div class="fn">6</div><div class="fc"><div class="fq">Is your voice, likeness, or distinctive style publicly available online?</div><span class="tag fw">Your voice/likeness can be cloned. Right of publicity varies by state. Florida: Fla. Stat. § 540.08.</span></div></div>
+    </div>
+
+    <div class="two">
+      <div class="ic">
+        <div class="iclabel">What you can do now</div>
+        <ul>
+          <li>Register copyright before publishing AI-assisted work — $65 at copyright.gov</li>
+          <li>Document every iteration: dates, prompts, decisions, edits</li>
+          <li>Check if your work is in training datasets: haveibeentrained.com</li>
+          <li>Submit opt-outs via spawning.ai across platforms</li>
+          <li>Use enterprise or opt-out tiers where possible (Adobe, some Midjourney)</li>
+          <li>Limit high-quality public voice/style samples strategically</li>
+        </ul>
+      </div>
+      <div class="ic">
+        <div class="iclabel">What law does NOT protect</div>
+        <ul>
+          <li>Purely AI-generated output with no human authorship</li>
+          <li>Your style, aesthetic, or creative approach</li>
+          <li>Your creative process or methodology</li>
+          <li>Prompts submitted to AI tools (unprotectable ideas)</li>
+          <li>Public performances or samples others can capture</li>
+          <li>Voice cloning in most jurisdictions (emerging law)</li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="div">
+    <div class="rsec">
+      <span class="rlabel">Key cases + resources</span>
+      <div class="rlinks">
+        <div><strong>Thaler v. Perlmutter</strong> — SCOTUS cert denied March 2, 2026. Human authorship = bedrock requirement of US copyright law.</div>
+        <div><strong>Allen v. Perlmutter</strong> — Pending. Tests how much human involvement is "enough." 600+ iterative prompts may qualify.</div>
+        <div><strong>NO AI FRAUD Act / NO FAKES Act</strong> — Proposed federal legislation targeting AI voice and likeness cloning.</div>
+        <div><strong>Time Magazine, March 26, 2026</strong> — "AI Slop Is Flooding Streaming." Full Benedict Cork case. <a href="https://time.com" target="_blank" rel="noopener">time.com</a></div>
+        <div><strong>Somara Jacques, Esq. / Latte Legal PLLC</strong> — IP + creative entrepreneur specialist, Miami.</div>
+      </div>
+    </div>
+
+    <div class="footnote">
+      <strong>For educational purposes only.</strong> Not legal advice. Prepared by Dimitry Saïd Chamy, Oolite Arts Skills Program, April 2026.
+    </div>
+  </section>
+
+  <!-- GUIDE 02: FREELANCE -->
+  <section class="guide" id="g2" aria-label="Guide 2: Freelancers and Teams">
+
+    <div class="guide-header">
+      <div>
+        <div class="guide-label">Guide 02</div>
+        <h2 class="guide-title">Freelancers + creative teams</h2>
+        <p class="guide-sub">Liability cascade and disclosure obligations when AI enters collaborative creative workflows.</p>
+      </div>
+      <span class="badge b2">Collaboration</span>
+    </div>
+
+    <div class="alert">
+      <p><strong>The silent liability problem:</strong> If a contractor uses AI and doesn't disclose it, the commissioning party may receive work with no valid copyright — and may be unknowingly distributing potentially infringing content. Disclosure isn't just ethical courtesy; it's risk management.</p>
+    </div>
+
+    <span class="slabel">Liability cascade: who owes what to whom</span>
+    <div class="mgrid">
+      <div class="mh">Role</div><div class="mh">Obligation</div><div class="mh">If undisclosed</div>
+      <div class="mc"><strong>Freelancer</strong>Using AI in deliverables</div>
+      <div class="mc">Disclose AI use in contract. Specify tools used, inputs provided, and human contributions made.</div>
+      <div class="mc mc-risk">Client may own no copyright in delivered work. Breach of contract possible. <span class="rtag rh">high risk</span></div>
+      <div class="mc"><strong>Creative director</strong>Overseeing AI-assisted team</div>
+      <div class="mc">Define AI use policy for team. Require disclosure from all contributors. Document human decisions at each stage.</div>
+      <div class="mc mc-warn">Downstream liability if undisclosed AI work is delivered to client. <span class="rtag rm">med risk</span></div>
+      <div class="mc"><strong>Studio / agency</strong>Delivering to client</div>
+      <div class="mc">Include AI disclosure clause in all client contracts. Warrant that work contains sufficient human authorship for copyright.</div>
+      <div class="mc mc-risk">Client may have misrepresentation claim. Cannot warrant copyright ownership. <span class="rtag rh">high risk</span></div>
+      <div class="mc"><strong>Commissioning party</strong>Receiving AI-assisted work</div>
+      <div class="mc">Require disclosure in contracts. Ask: what tools were used? What human contributions were made? Get documentation.</div>
+      <div class="mc mc-warn">May distribute unprotected or infringing work. Reputational + legal risk. <span class="rtag rm">med risk</span></div>
+    </div>
+
+    <span class="slabel">Contract clause checklist</span>
+    <ul class="cl2">
+      <li><div class="cb"></div><div class="ctext"><strong>AI use disclosure clause <span class="pri p1">now</span></strong>Specify whether AI tools may be used, which tools are approved, and require written disclosure before delivery.</div></li>
+      <li><div class="cb"></div><div class="ctext"><strong>Human authorship warranty <span class="pri p1">now</span></strong>Contractor warrants that deliverables contain sufficient human creative contribution to qualify for copyright protection.</div></li>
+      <li><div class="cb"></div><div class="ctext"><strong>Indemnification clause <span class="pri p1">now</span></strong>Contractor indemnifies client against third-party copyright claims arising from undisclosed AI training data use.</div></li>
+      <li><div class="cb"></div><div class="ctext"><strong>IP ownership clarity <span class="pri p2">soon</span></strong>Define who owns AI-assisted outputs, AI-generated drafts, prompts, and iteration files upon project completion.</div></li>
+      <li><div class="cb"></div><div class="ctext"><strong>Process documentation requirement <span class="pri p2">soon</span></strong>Require contractors to maintain records of AI tool use, prompts, and human creative decisions for copyright defense purposes.</div></li>
+      <li><div class="cb"></div><div class="ctext"><strong>Methodology protection clause <span class="pri p3">plan</span></strong>Prohibit use of your distinctive creative process or style data to train third-party AI systems.</div></li>
+    </ul>
+
+    <hr class="div">
+    <div class="rsec">
+      <span class="rlabel">Key terms</span>
+      <div class="trow"><div class="tname">Work for hire</div><div class="tdef">Work created by an employee in scope of employment, or by a contractor under written agreement in specific categories. Employer/commissioning party owns copyright — but if work lacks human authorship, there may be nothing to own.</div></div>
+      <div class="trow"><div class="tname">Indemnification</div><div class="tdef">A contractual obligation for one party to compensate the other for losses arising from specific acts. For AI work: contractors should indemnify clients for copyright claims arising from their AI tool use.</div></div>
+      <div class="trow"><div class="tname">Warranty of originality</div><div class="tdef">Common contract provision where the creator guarantees the work is original. In the AI era, this must be updated to address AI contributions and copyright eligibility explicitly.</div></div>
+    </div>
+
+    <div class="rsec">
+      <span class="rlabel">Resources</span>
+      <div class="rlinks">
+        <div><strong>SAG-AFTRA AI Agreement (2025)</strong> — First major union contract with explicit AI protections. A model for other creative sectors.</div>
+        <div><strong>Illustrators' Partnership AI Clause (2025)</strong> — Industry-level model AI provisions for creative contracts.</div>
+        <div><strong>Andrej Milic, Esq.</strong> — Director of Development, FIU College of Law. Contracts + creative practice specialist.</div>
+      </div>
+    </div>
+
+    <div class="footnote">
+      <strong>For educational purposes only.</strong> Not legal advice. Prepared by Dimitry Saïd Chamy, Oolite Arts Skills Program, April 2026.
+    </div>
+  </section>
+
+  <!-- GUIDE 03: CLIENT WORK -->
+  <section class="guide" id="g3" aria-label="Guide 3: Client and Commercial Work">
+
+    <div class="guide-header">
+      <div>
+        <div class="guide-label">Guide 03</div>
+        <h2 class="guide-title">Client + commercial work</h2>
+        <p class="guide-sub">Disclosure requirements, copyright ownership, and liability when delivering AI-assisted creative work to clients.</p>
+      </div>
+      <span class="badge b3">Commercial</span>
+    </div>
+
+    <div class="case-box">
+      <div class="cl">The speed problem</div>
+      <p>When Anthropic's code repository was leaked and refactored across programming languages before copyright takedown notices could land, the asset was effectively gone. A company with full legal resources could not contain it. If IP law moves in years and AI moves in hours, legal protection is reactive at best. For independent creatives and small studios, the practical strategy must shift: build value around what cannot be extracted — relationship, context, trust, and the irreducibly human.</p>
+    </div>
+
+    <span class="slabel">Before you deliver: disclosure decision tree</span>
+    <div class="flow-grid">
+      <div class="flow-row"><div class="fn">1</div><div class="fc"><div class="fq">Does your contract with the client address AI use?</div><span class="tag fy">YES → follow those terms</span><span class="tag fno">NO → disclose proactively before delivery <span class="rtag rh">risk</span></span></div></div>
+      <div class="flow-row"><div class="fn">2</div><div class="fc"><div class="fq">Was AI used for ideation/research only, or in the final deliverable?</div><span class="tag fa">Ideation use = lower risk. Final output use = must disclose and document human contributions explicitly.</span></div></div>
+      <div class="flow-row"><div class="fn">3</div><div class="fc"><div class="fq">Can you warrant that the work contains sufficient human authorship to be copyrightable?</div><span class="tag fy">YES + documented → deliver with written disclosure memo</span><span class="tag fno">NO → do not warrant copyright ownership to client</span></div></div>
+      <div class="flow-row"><div class="fn">4</div><div class="fc"><div class="fq">Does the client's industry have specific AI disclosure requirements?</div><span class="tag fw">Publishing, advertising, entertainment: emerging sector requirements. Check current guild/union standards before delivery.</span></div></div>
+      <div class="flow-row"><div class="fn">5</div><div class="fc"><div class="fq">Did any AI tool you used potentially ingest client confidential material?</div><span class="tag fa">Do not input client confidential data into external AI tools without explicit client consent. ToS may not protect client data. <span class="rtag rh">risk</span></span></div></div>
+    </div>
+
+    <span class="slabel" style="margin-top: 1.5rem; display: block;">What law can and cannot do: the reality matrix</span>
+    <div class="mgrid">
+      <div class="mh">Threat</div><div class="mh">Legal tools available</div><div class="mh">Practical reality</div>
+      <div class="mc"><strong>Work scraped for training</strong>Without consent</div>
+      <div class="mc">DMCA takedown, copyright infringement claim, opt-out registries (Spawning.ai, Have I Been Trained)</div>
+      <div class="mc mc-warn">Slow. Courts split on fair use for training. Register work early. <span class="rtag rm">med</span></div>
+      <div class="mc"><strong>Style / voice cloned</strong>From your public work</div>
+      <div class="mc">Right of publicity (state law), unfair competition, emerging AI-specific legislation</div>
+      <div class="mc mc-risk">Style is not copyrightable. Right of publicity varies by state. Very limited recourse. <span class="rtag rh">high</span></div>
+      <div class="mc"><strong>Process / methodology extracted</strong>Via tool usage data</div>
+      <div class="mc">Trade secret (if kept confidential), contract provisions, platform opt-outs</div>
+      <div class="mc mc-risk">No established legal framework. ToS typically favors platform. Highest long-term risk. <span class="rtag rh">high</span></div>
+      <div class="mc"><strong>Work published without consent</strong>Under your name</div>
+      <div class="mc">DMCA, false attribution, right of publicity, defamation</div>
+      <div class="mc mc-warn">Possible but slow. Asset spreads faster than takedowns. Document everything immediately.</div>
+    </div>
+
+    <hr class="div">
+    <div class="rsec">
+      <span class="rlabel">Key terms</span>
+      <div class="trow"><div class="tname">DMCA takedown</div><div class="tdef">Notice requiring platforms to remove infringing content. Fast in theory; slow in practice when AI content spreads or is transformed faster than notices can land.</div></div>
+      <div class="trow"><div class="tname">Fair use (training)</div><div class="tdef">Courts are split. Copyright Office Part 3 (May 2025): outcomes must be determined case-by-case. Some training = fair use; some = infringement. Not settled law.</div></div>
+      <div class="trow"><div class="tname">Trade secret</div><div class="tdef">Protects confidential business process or method if actively maintained as secret. Inputting your process into an external AI tool may destroy trade secret protection entirely.</div></div>
+    </div>
+
+    <div class="footnote">
+      <strong>For educational purposes only.</strong> Not legal advice. Prepared by Dimitry Saïd Chamy, Oolite Arts Skills Program, April 2026.
+    </div>
+  </section>
+
+  <!-- GUIDE 04: INSTITUTIONAL -->
+  <section class="guide" id="g4" aria-label="Guide 4: Institutional and Educational">
+
+    <div class="guide-header">
+      <div>
+        <div class="guide-label">Guide 04</div>
+        <h2 class="guide-title">Institutional + educational</h2>
+        <p class="guide-sub">What creative programs, art schools, and cultural institutions need to teach, implement, and protect — beyond plagiarism.</p>
+      </div>
+      <span class="badge b4">Institutional</span>
+    </div>
+
+    <div class="alert">
+      <p><strong>Beyond plagiarism:</strong> Current institutional AI policy is largely framed around academic integrity — did the student cheat? The deeper question for creative programs is sovereignty: are we preparing graduates who understand that their creative identity, process, and methodology are now extractable commodities — and who know how to protect them?</p>
+    </div>
+
+    <span class="slabel">What creative programs should teach (beyond plagiarism)</span>
+    <ul class="cl2">
+      <li><div class="cb"></div><div class="ctext"><strong>Copyright registration as practice habit <span class="pri p1">now</span></strong>Every graduating student should know how to register a copyright. US Copyright Office: $65, about one hour. Defense value: essential. Do it before you publish.</div></li>
+      <li><div class="cb"></div><div class="ctext"><strong>Reading AI terms of service <span class="pri p1">now</span></strong>Identify training data clauses, IP ownership provisions, and opt-out mechanisms in any AI platform ToS before using it professionally.</div></li>
+      <li><div class="cb"></div><div class="ctext"><strong>Documenting human creative process <span class="pri p1">now</span></strong>Process documentation is now a copyright defense strategy. Save drafts, date iterations, note decisions. This is the evidence for "sufficient human contribution."</div></li>
+      <li><div class="cb"></div><div class="ctext"><strong>Understanding epistemic exposure <span class="pri p2">soon</span></strong>When students use AI tools, their creative methodology becomes potential training data. The risk isn't just someone copying your output — it's modeling your process.</div></li>
+      <li><div class="cb"></div><div class="ctext"><strong>Contract literacy for AI clauses <span class="pri p2">soon</span></strong>Standard freelance contracts must now address AI. Students should recognize and negotiate: disclosure requirements, human authorship warranty, and IP ownership of AI-assisted outputs.</div></li>
+      <li><div class="cb"></div><div class="ctext"><strong>Knowing when to ask a lawyer <span class="pri p2">soon</span></strong>Build a referral ecosystem: legal clinics, IP pro bono resources, bar association artist programs. Creative students often cannot afford legal counsel — institutional programs should bridge this gap.</div></li>
+    </ul>
+
+    <span class="slabel" style="margin-top: 1.5rem; display: block;">Institutional policy audit</span>
+    <div class="mgrid">
+      <div class="mh">Area</div><div class="mh">Current gap</div><div class="mh">Recommended action</div>
+      <div class="mc"><strong>Student IP ownership</strong></div>
+      <div class="mc">Most university IP policies predate generative AI. Who owns AI-assisted student work created using institutional resources?</div>
+      <div class="mc">Update IP policy to explicitly address AI-assisted student work. Default toward student ownership.</div>
+      <div class="mc"><strong>Faculty research + AI</strong></div>
+      <div class="mc">Faculty using AI in research may be surrendering institutional IP to platform training data without realizing it.</div>
+      <div class="mc">Establish approved tools list. Require enterprise or private deployment for sensitive research.</div>
+      <div class="mc"><strong>Client work in programs</strong></div>
+      <div class="mc">Students doing real client work through institutional programs: undisclosed AI use creates institutional liability.</div>
+      <div class="mc">Require AI disclosure in all student-client agreements. Define the program's warranty position clearly.</div>
+      <div class="mc"><strong>Curriculum</strong></div>
+      <div class="mc">Syllabi address plagiarism but not what AI tool data means for student creative identity long-term.</div>
+      <div class="mc">Add AI + IP sovereignty module to all creative programs. Not just plagiarism — creative sovereignty.</div>
+    </div>
+
+    <hr class="div">
+    <div class="rsec">
+      <span class="rlabel">Florida + Miami resources</span>
+      <div class="rlinks">
+        <div><strong>US Copyright Office</strong> — <a href="https://copyright.gov/registration" target="_blank" rel="noopener">copyright.gov/registration</a> — $65 standard registration. Do it before you publish.</div>
+        <div><strong>Have I Been Trained?</strong> — <a href="https://haveibeentrained.com" target="_blank" rel="noopener">haveibeentrained.com</a> — Check if your work appears in AI training datasets. Submit opt-out requests.</div>
+        <div><strong>Spawning.ai</strong> — <a href="https://spawning.ai" target="_blank" rel="noopener">spawning.ai</a> — Cross-platform AI training data opt-out tool.</div>
+        <div><strong>Florida Bar Foundation</strong> — <a href="https://floridabar.org" target="_blank" rel="noopener">floridabar.org</a> — IP pro bono resources and legal clinic referrals.</div>
+        <div><strong>FIU College of Law</strong> — <a href="https://law.fiu.edu" target="_blank" rel="noopener">law.fiu.edu</a> — Andrej Milic, Esq., Director of Development. IP and contracts resources.</div>
+        <div><strong>Latte Legal PLLC</strong> — Somara Jacques, Esq. — IP + creative entrepreneur specialist, Miami.</div>
+      </div>
+    </div>
+
+    <div class="footnote">
+      <strong>For educational purposes only.</strong> This guide does not constitute legal advice and does not create an attorney-client relationship. Prepared by Dimitry Saïd Chamy, Co-Founding Faculty, Ratcliffe Art + Design Incubator at FIU · Oolite Arts Skills Program · April 2026.
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <span>Oolite Arts · Skills Program · April 2026</span>
+    <span>Educational use only · Not legal advice</span>
+  </footer>
+
+</div>
+
+<script>
+  function show(n) {
+    document.querySelectorAll('.guide').forEach(function(g, i) {
+      g.classList.toggle('visible', i === n);
+    });
+    document.querySelectorAll('.guide-nav button').forEach(function(b, i) {
+      b.classList.toggle('active', i === n);
+      b.setAttribute('aria-pressed', i === n ? 'true' : 'false');
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
