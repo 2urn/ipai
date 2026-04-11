@@ -211,6 +211,7 @@
   .b2 { background: #362212; color: #d4922a; border: 0.5px solid #6b4518; }
   .b3 { background: #0d2e24; color: #2ab88e; border: 0.5px solid #155c44; }
   .b4 { background: #1e1d40; color: #8880d8; border: 0.5px solid #3d3898; }
+  .b5 { background: #1a2030; color: #6eaadf; border: 0.5px solid #2e4870; }
 
   hr.div { border: none; border-top: 0.5px solid var(--border); margin: 1.5rem 0; }
 
@@ -619,6 +620,68 @@
     gap: 8px;
   }
 
+  /* Reading list */
+  .rl-item {
+    padding: 11px 0;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .rl-item:last-child { border-bottom: none; }
+
+  .rl-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 5px;
+    align-items: center;
+  }
+
+  .rl-pub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .rl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--faint);
+  }
+  .rl-date::before { content: '·'; margin-right: 5px; color: var(--faint); }
+
+  .rl-field {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    padding: 1px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .rl-music  { background: #1a0d2e; color: #b080e8; border: 0.5px solid #3d2060; }
+  .rl-visual { background: #0d1e2e; color: #60a8e0; border: 0.5px solid #1a4060; }
+  .rl-writing{ background: #0d2010; color: #60c070; border: 0.5px solid #1a4820; }
+  .rl-legal  { background: #201808; color: #d09040; border: 0.5px solid #483010; }
+  .rl-tool   { background: #1a1a1a; color: #a8a69e; border: 0.5px solid #444441; }
+  .rl-platform{ background: #0d2020; color: #40b8b0; border: 0.5px solid #1a4840; }
+
+  .rl-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.45;
+  }
+  .rl-title a { color: var(--teal); text-decoration: none; }
+  .rl-title a:hover { text-decoration: underline; }
+
+  .rl-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
   /* Print styles */
   @media print {
     .guide-nav { display: none; }
@@ -655,6 +718,7 @@
     <button onclick="show(2)">02 · Freelance</button>
     <button onclick="show(3)">03 · Client work</button>
     <button onclick="show(4)">04 · Institutional</button>
+    <button onclick="show(5)">05 · Reading list</button>
   </nav>
 
   <!-- GUIDE 00: GLOSSARY -->
@@ -1012,6 +1076,192 @@
 
     <div class="footnote">
       <strong>For educational purposes only.</strong> This guide does not constitute legal advice and does not create an attorney-client relationship. Prepared by Dimitry Saïd Chamy, Co-Founding Faculty, Ratcliffe Art + Design Incubator at FIU · Oolite Arts Skills Program · April 2026.
+    </div>
+  </section>
+
+  <!-- GUIDE 05: READING LIST -->
+  <section class="guide" id="g5" aria-label="Guide 5: Reading List">
+
+    <div class="guide-header">
+      <div>
+        <div class="guide-label">Guide 05</div>
+        <h2 class="guide-title">Reading list</h2>
+        <p class="guide-sub">Curated articles, cases, and resources across creative fields. Updated April 2026. Organized by domain — start with your field, then read across.</p>
+      </div>
+      <span class="badge b5">Further reading</span>
+    </div>
+
+    <!-- MUSIC -->
+    <span class="slabel">Music + audio</span>
+    <div style="margin-bottom: 1.5rem;">
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">The Guardian</span><span class="rl-date">April 11, 2026</span><span class="rl-field rl-music">Music</span></div>
+        <div class="rl-title"><a href="https://www.theguardian.com/technology/2026/apr/11/ai-impersonating-musicians-spotify" target="_blank" rel="noopener">'It has your name on it, but I don't think it's you': how AI is impersonating musicians on Spotify</a></div>
+        <div class="rl-note">Today's article. Covers Spotify's new Artist Profile Protection feature (launched March 24) and the ongoing wave of AI impersonation on streaming platforms. Essential current context.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Time</span><span class="rl-date">March 26, 2026</span><span class="rl-field rl-music">Music</span></div>
+        <div class="rl-title"><a href="https://time.com/article/2026/03/26/ai-slop-is-threatening-musicians-can-tech-companies-stem-the-tide-/" target="_blank" rel="noopener">AI Slop Is Flooding Streaming — and Musicians Are Fighting Back</a></div>
+        <div class="rl-note">The definitive current overview. Includes the Benedict Cork case, Ormella's impersonation, and scale data: 50,000 AI tracks uploaded to Deezer daily. Primary source for tonight's panel.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Rolling Stone</span><span class="rl-date">March 2026</span><span class="rl-field rl-music">Music</span></div>
+        <div class="rl-title"><a href="https://www.rollingstone.com/music/music-features/ai-scams-musicians-streaming-services-spotify-1235535753/" target="_blank" rel="noopener">'This Is Not Me': Inside the AI Scams Driving Musicians Crazy</a></div>
+        <div class="rl-note">Ground-level reporting on indie artists discovering fake AI songs on their Spotify pages. Includes Murphy Campbell, Paul Bender's "Operation Clown Dump" experiment, and the systemic gaps in DistroKid and TuneCore authentication.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">The Honest Broker</span><span class="rl-date">March 2026</span><span class="rl-field rl-music">Music</span></div>
+        <div class="rl-title"><a href="https://www.honest-broker.com/p/is-spotify-enabling-massive-impersonation" target="_blank" rel="noopener">Is Spotify Enabling Massive Impersonation of Famous Jazz Musicians?</a></div>
+        <div class="rl-note">Ted Gioia's investigation into AI impersonation targeting jazz artists — including deceased musicians. First-person reporting, names confirmed, albums verified as fake. Benny Green contacted directly. Shows the problem is not genre-specific.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Spotify Newsroom</span><span class="rl-date">March 24, 2026</span><span class="rl-field rl-music">Music</span><span class="rl-field rl-platform">Platform response</span></div>
+        <div class="rl-title"><a href="https://newsroom.spotify.com/2025-09-25/spotify-strengthens-ai-protections/" target="_blank" rel="noopener">Spotify Strengthens AI Protections for Artists, Songwriters, and Producers</a></div>
+        <div class="rl-note">Official Spotify policy document covering Artist Profile Protection (beta), the new impersonation policy covering AI voice clones, and the removal of 75 million+ spammy tracks. Primary source — read alongside the journalism.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Digital Music News</span><span class="rl-date">March 2026</span><span class="rl-field rl-music">Music</span></div>
+        <div class="rl-title"><a href="https://www.digitalmusicnews.com/2026/03/29/artists-fight-back-against-ai-slop/" target="_blank" rel="noopener">Artists Fight Back Against AI Slop, But Are DSPs Doing Enough?</a></div>
+        <div class="rl-note">Industry-level analysis. Covers Sony's 135,000+ takedown requests, the Benedict Cork case, and King Gizzard's Spotify exit and AI impersonation. Asks whether platform responses are sufficient.</div>
+      </div>
+    </div>
+
+    <!-- VISUAL ART -->
+    <span class="slabel">Visual art + photography</span>
+    <div style="margin-bottom: 1.5rem;">
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Copyright Alliance</span><span class="rl-date">August 2025</span><span class="rl-field rl-visual">Visual art</span><span class="rl-field rl-legal">Legal</span></div>
+        <div class="rl-title"><a href="https://copyrightalliance.org/ai-copyright-case-developments-2025/" target="_blank" rel="noopener">Mid-Year Review: AI Copyright Case Developments in 2025</a></div>
+        <div class="rl-note">Comprehensive tracker of 30+ active AI infringement cases. Covers visual artists (Andersen v. Stability AI), photographers (Getty v. Stability AI), writers, and musicians. Essential reference for understanding the litigation landscape across fields.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Center for Art Law</span><span class="rl-date">May 2025</span><span class="rl-field rl-visual">Visual art</span><span class="rl-field rl-legal">Legal</span></div>
+        <div class="rl-title"><a href="https://itsartlaw.org/art-law/recent-developments-in-ai-art-copyright-copyright-office-report-new-registrations/" target="_blank" rel="noopener">Recent Developments in AI, Art &amp; Copyright: Copyright Office Report &amp; New Registrations</a></div>
+        <div class="rl-note">Clear breakdown of the Copyright Office's January 2025 report for visual artists. Distinguishes between minimal input (unprotectable) and substantial human creativity (protectable). Includes real registration case examples. Recommended for visual artists using AI tools.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Pennington's Law</span><span class="rl-date">April 2026</span><span class="rl-field rl-visual">Visual art</span><span class="rl-field rl-legal">Legal</span></div>
+        <div class="rl-title"><a href="https://www.penningtonslaw.com/insights/ai-art-and-global-approaches-to-copyright-law-us-supreme-court-declines-to-review-the-case-of-thaler-v-perlmutter/" target="_blank" rel="noopener">AI, Art and Global Approaches to Copyright Law: US Supreme Court Declines to Review Thaler v. Perlmutter</a></div>
+        <div class="rl-note">Current global overview including the UK's Getty v. Stability AI outcome, the House of Lords recommendation against AI training exceptions, and China's contrasting approach to AI authorship. Useful for understanding that this is a worldwide issue with diverging national responses.</div>
+      </div>
+    </div>
+
+    <!-- WRITING + JOURNALISM -->
+    <span class="slabel">Writing, journalism + publishing</span>
+    <div style="margin-bottom: 1.5rem;">
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Norton Rose Fulbright</span><span class="rl-date">March 2026</span><span class="rl-field rl-writing">Writing</span><span class="rl-field rl-legal">Legal</span></div>
+        <div class="rl-title"><a href="https://www.nortonrosefulbright.com/en/knowledge/publications/ce8eaa5f/ai-in-litigation-series-an-update-on-ai-copyright-cases-in-2026" target="_blank" rel="noopener">AI in Litigation Series: An Update on AI Copyright Cases in 2026</a></div>
+        <div class="rl-note">Major law firm's authoritative case-by-case tracker. Covers Thomson Reuters v. Ross Intelligence (legal sector), the NYT v. OpenAI/Perplexity cases (journalism), authors' class actions against LLM developers, and music publisher cases against Anthropic. Best single source for the full litigation landscape.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Lexology</span><span class="rl-date">March 2026</span><span class="rl-field rl-writing">Writing</span><span class="rl-field rl-legal">Legal</span></div>
+        <div class="rl-title"><a href="https://www.lexology.com/library/detail.aspx?g=1c80f0d3-c6b5-4b2d-af10-77baa816751d" target="_blank" rel="noopener">AI in Litigation Series: An Update on AI Copyright Cases in 2026</a></div>
+        <div class="rl-note">Covers the author MDL against OpenAI, including the January 2026 court order for OpenAI to produce 20 million output logs. Critical for writers: if outputs are "substantially similar" to training works, infringement claims survive. Discovery ongoing.</div>
+      </div>
+    </div>
+
+    <!-- LAW + LEGAL SECTOR -->
+    <span class="slabel">Law + the legal sector</span>
+    <div style="margin-bottom: 1.5rem;">
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">National Law Review</span><span class="rl-date">January 2026</span><span class="rl-field rl-legal">Legal</span></div>
+        <div class="rl-title"><a href="https://natlawreview.com/article/85-predictions-ai-and-law-2026" target="_blank" rel="noopener">85 Predictions for AI and the Law in 2026</a></div>
+        <div class="rl-note">Survey of 85 legal professionals. Key findings: 77% say AGI won't happen in 2026; the billable hour is not dead but evolving; AI hallucinations in court filings remain a persistent problem. Useful for understanding how the profession advising creatives is itself struggling with AI integration.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Artificial Lawyer</span><span class="rl-date">January 2026</span><span class="rl-field rl-legal">Legal</span></div>
+        <div class="rl-title"><a href="https://www.artificiallawyer.com/2026/01/08/artificial-lawyer-predictions-2026/" target="_blank" rel="noopener">Artificial Lawyer Predictions 2026</a></div>
+        <div class="rl-note">The legal tech industry's own forecasts. Includes the epistemic capture angle from inside the profession: AI tools trained on legal knowledge are replacing entry-level legal research while senior lawyers use the same tools — creating structural contradictions in how the profession values its own expertise.</div>
+      </div>
+    </div>
+
+    <!-- PRIMARY LEGAL SOURCES -->
+    <span class="slabel">Primary legal sources + official documents</span>
+    <div style="margin-bottom: 1.5rem;">
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">US Copyright Office</span><span class="rl-date">January 2025</span><span class="rl-field rl-legal">Official</span></div>
+        <div class="rl-title"><a href="https://www.copyright.gov/ai/Copyright-and-Artificial-Intelligence-Part-2-Copyrightability-Report.pdf" target="_blank" rel="noopener">Copyright and Artificial Intelligence, Part 2: Copyrightability Report</a></div>
+        <div class="rl-note">The primary government document on AI and copyright. Establishes that prompts alone are insufficient; defines "substantial human contribution"; distinguishes minimal input (unprotectable) from expressive inputs that are "perceptible in the output" (protectable). Required reading.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">US Copyright Office</span><span class="rl-date">May 2025</span><span class="rl-field rl-legal">Official</span></div>
+        <div class="rl-title"><a href="https://www.copyright.gov/ai/Copyright-and-Artificial-Intelligence-Part-3-Generative-AI-Training-Report-Pre-Publication-Version.pdf" target="_blank" rel="noopener">Copyright and Artificial Intelligence, Part 3: Generative AI Training</a></div>
+        <div class="rl-note">The Copyright Office's most consequential document on training data and fair use. Conclusion: "Some uses will qualify as fair use, and some will not." No bright line. Knowingly using pirated works weighs against fair use. Guardrails against infringing outputs weigh in favor. Essential for understanding the training data debate.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">US Copyright Office</span><span class="rl-date">Ongoing</span><span class="rl-field rl-legal">Official</span></div>
+        <div class="rl-title"><a href="https://www.copyright.gov/ai/ai_policy_guidance.pdf" target="_blank" rel="noopener">Copyright Office AI Policy Guidance — Registration with AI-Generated Content</a></div>
+        <div class="rl-note">Practical registration guidance. Includes exact language for disclosure of AI use in copyright applications: "This work contains AI-generated material that was created using [AI system], and human-authored content created by the author." Use this when registering AI-assisted work.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Mayer Brown</span><span class="rl-date">March 2026</span><span class="rl-field rl-legal">Legal analysis</span></div>
+        <div class="rl-title"><a href="https://www.mayerbrown.com/en/insights/publications/2026/03/supreme-court-denies-review-in-ai-authorship-case" target="_blank" rel="noopener">Supreme Court Denies Review in AI Authorship Case</a></div>
+        <div class="rl-note">Best concise legal analysis of what the Thaler cert denial actually means. Explains that Allen v. Perlmutter (600+ prompts case) may still provide guidance on "how much human involvement is enough." Notes that the Court can revisit in a future case.</div>
+      </div>
+    </div>
+
+    <!-- TOOLS + OPT-OUTS -->
+    <span class="slabel">Tools + opt-out resources for creatives</span>
+    <div style="margin-bottom: 1.5rem;">
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Have I Been Trained?</span><span class="rl-date">Active</span><span class="rl-field rl-tool">Tool</span></div>
+        <div class="rl-title"><a href="https://haveibeentrained.com" target="_blank" rel="noopener">haveibeentrained.com</a></div>
+        <div class="rl-note">Search whether your work appears in major AI training datasets including LAION-5B. Submit opt-out requests directly. Free. Start here.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Spawning.ai</span><span class="rl-date">Active</span><span class="rl-field rl-tool">Tool</span></div>
+        <div class="rl-title"><a href="https://spawning.ai" target="_blank" rel="noopener">spawning.ai</a></div>
+        <div class="rl-note">Cross-platform opt-out infrastructure for AI training data. Manages opt-outs across multiple systems simultaneously. Free for individual creators.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">US Copyright Office</span><span class="rl-date">Active</span><span class="rl-field rl-tool">Tool</span></div>
+        <div class="rl-title"><a href="https://copyright.gov/registration" target="_blank" rel="noopener">copyright.gov/registration</a></div>
+        <div class="rl-note">Standard copyright registration: $65, approximately one hour. Do this before you publish AI-assisted work. This is your primary legal protection and the foundation of any infringement claim.</div>
+      </div>
+
+      <div class="rl-item">
+        <div class="rl-meta"><span class="rl-pub">Spotify for Artists</span><span class="rl-date">Beta, March 2026</span><span class="rl-field rl-music">Music</span><span class="rl-field rl-tool">Tool</span></div>
+        <div class="rl-title"><a href="https://artists.spotify.com" target="_blank" rel="noopener">Artist Profile Protection — artists.spotify.com</a></div>
+        <div class="rl-note">Spotify's new opt-in feature (beta) letting musicians review and approve releases before they appear under their name. Generates an "artist key" to share with trusted distributors. Enable this now if you distribute music through Spotify.</div>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <div class="rsec">
+      <span class="rlabel">How to stay current</span>
+      <div class="rlinks">
+        <div><strong>Copyright Alliance</strong> — <a href="https://copyrightalliance.org" target="_blank" rel="noopener">copyrightalliance.org</a> — Best ongoing tracker of AI copyright litigation. Creator-focused, updated regularly.</div>
+        <div><strong>The Honest Broker (Ted Gioia)</strong> — <a href="https://www.honest-broker.com" target="_blank" rel="noopener">honest-broker.com</a> — Music industry intelligence with sharp AI coverage. Substack, free tier available.</div>
+        <div><strong>Latte Lawyer (Somara Jacques)</strong> — Educational platform for creative entrepreneurs on IP law. <a href="https://www.instagram.com/thelattelawyer" target="_blank" rel="noopener">Follow</a> for practical legal updates in plain language.</div>
+        <div><strong>Andrej Milic / FIU College of Law</strong> — <a href="https://law.fiu.edu" target="_blank" rel="noopener">law.fiu.edu</a> — Contracts and creative practice resources.</div>
+        <div><strong>US Copyright Office AI page</strong> — <a href="https://copyright.gov/ai" target="_blank" rel="noopener">copyright.gov/ai</a> — Primary source for all official policy updates. Bookmark this.</div>
+      </div>
+    </div>
+
+    <div class="footnote">
+      <strong>For educational purposes only.</strong> Links are provided for informational reference. Inclusion does not constitute endorsement. Content current as of April 2026. Curated by Dimitry Saïd Chamy, Co-Founding Faculty, Ratcliffe Art + Design Incubator at FIU · Oolite Arts Skills Program · April 2026.
     </div>
   </section>
 
